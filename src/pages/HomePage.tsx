@@ -1,8 +1,9 @@
-import { Button, Typography } from 'antd';
+import { Button, Space, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import AppShell from '../layouts/AppShell';
 import { clearTokens } from '../features/auth';
 
-/** Placeholder landing screen — the target of a successful login. */
+/** Landing screen — the target of a successful login. */
 export default function HomePage() {
   const navigate = useNavigate();
 
@@ -12,12 +13,19 @@ export default function HomePage() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center gap-4 bg-slate-100 px-4">
-      <Typography.Title level={3}>You are signed in to DevFlow</Typography.Title>
-      <Typography.Text type="secondary">
-        Workspaces, projects and issues are not built yet — see the Roadmap.
-      </Typography.Text>
-      <Button onClick={handleLogout}>Sign out</Button>
-    </main>
+    <AppShell>
+      <div className="flex min-h-full flex-col items-center justify-center gap-4 px-4 py-16">
+        <Typography.Title level={3}>You are signed in to DevFlow</Typography.Title>
+        <Typography.Text type="secondary">
+          Projects and issues are not built yet — see the Roadmap.
+        </Typography.Text>
+        <Space>
+          <Button type="primary" onClick={() => navigate('/workspaces')}>
+            Browse workspaces
+          </Button>
+          <Button onClick={handleLogout}>Sign out</Button>
+        </Space>
+      </div>
+    </AppShell>
   );
 }

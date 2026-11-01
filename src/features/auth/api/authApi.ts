@@ -1,5 +1,5 @@
 import { httpClient } from '../../../services/httpClient';
-import type { AuthTokenDto, LoginRequest, UserCreateRequest } from '../types/auth';
+import type { AuthTokenDto, LoginRequest, UserCreateRequest, UserDto } from '../types/auth';
 
 export const authApi = {
   async login(request: LoginRequest): Promise<AuthTokenDto> {
@@ -9,5 +9,10 @@ export const authApi = {
 
   async register(request: UserCreateRequest): Promise<void> {
     await httpClient.post<void>('/auth/user', request);
+  },
+
+  async getMySelf(): Promise<UserDto> {
+    const { data } = await httpClient.get<UserDto>('/auth/my-self');
+    return data;
   },
 };

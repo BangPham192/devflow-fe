@@ -25,3 +25,12 @@ export interface UserCreateRequest {
   password: string;
   role: UserRole;
 }
+
+/** Response of GET /api/v1/auth/my-self (requires auth) */
+export interface UserDto {
+  id: string;
+  username: string;
+  email: string;
+  roles: UserRole[];
+  createdAt: string | null;
+}

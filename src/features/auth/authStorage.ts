@@ -1,10 +1,15 @@
+import { clearCurrentUserCache } from './currentUserCache';
 import type { AuthTokenDto } from './types/auth';
 
-const ACCESS_TOKEN_KEY = 'devflow.accessToken';
-const REFRESH_TOKEN_KEY = 'devflow.refreshToken';
+const ACCESS_TOKEN_KEY = 'accessToken';
+const REFRESH_TOKEN_KEY = 'refreshToken';
 
 export function getAccessToken(): string | null {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
+}
+
+export function getRefreshToken(): string | null {
+  return localStorage.getItem(REFRESH_TOKEN_KEY);
 }
 
 export function storeTokens(tokens: AuthTokenDto): void {
@@ -15,4 +20,5 @@ export function storeTokens(tokens: AuthTokenDto): void {
 export function clearTokens(): void {
   localStorage.removeItem(ACCESS_TOKEN_KEY);
   localStorage.removeItem(REFRESH_TOKEN_KEY);
+  clearCurrentUserCache();
 }
